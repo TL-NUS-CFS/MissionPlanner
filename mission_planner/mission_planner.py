@@ -30,6 +30,8 @@ class MissionPlanner(Node):
             detectedTag = msg.transforms[0].child_frame_id
             self.get_logger().info('I saw: "%s"' % detectedTag)
             if detectedTag in self.undetectedTags:
+                self.get_logger().info('Is in undetected tags')
+                #self.undetectedTags.remove(detectedTag)
                 #land
         return
 
