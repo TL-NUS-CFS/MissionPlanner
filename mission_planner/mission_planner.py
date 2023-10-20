@@ -9,6 +9,7 @@ class MissionPlanner(Node):
     def __init__(self):
         super().__init__('mission_planner')
         #maybe do a subscription creation loop for drone in drones[]
+        self.undetectedTags = {"tag36h11:52"}
         self.subscription = self.create_subscription(
             TFMessage,
             'cf13/tf',
@@ -17,7 +18,7 @@ class MissionPlanner(Node):
         self.subscription  # prevent unused variable warning
 
     def listener_callback(self, msg):
-        self.get_logger().info('I heard: "%s"' % msg.transforms[0].child_frame_id)
+        #self.get_logger().info('I heard: "something' )
         # check if drone is up down
             #ignore
         # check if message empty
@@ -25,6 +26,16 @@ class MissionPlanner(Node):
         # check if target is captured
             #ignore
             #run takeoff.py
+        if msg.transforms:
+            detectedTag = msg.transforms[0].child_frame_id
+            self.get_logger().info('I saw: "%s"' % detectedTag)
+            if detectedTag in self.undetectedTags:
+                #land
+        return
+
+
+
+        
 
 
 def main(args=None):
