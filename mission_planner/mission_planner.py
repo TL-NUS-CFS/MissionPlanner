@@ -2,7 +2,7 @@ import rclpy
 from rclpy.node import Node
 from tf2_msgs.msg import TFMessage
 from std_msgs.msg import String
-
+from .land import land_command
 
 class MissionPlanner(Node):
 
@@ -31,6 +31,7 @@ class MissionPlanner(Node):
             self.get_logger().info('I saw: "%s"' % detectedTag)
             if detectedTag in self.undetectedTags:
                 self.get_logger().info('Is in undetected tags')
+                land_command()
                 #self.undetectedTags.remove(detectedTag)
                 #land
         return
