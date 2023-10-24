@@ -38,10 +38,37 @@ def generate_launch_description():
                 ('/detections','/cf13/detections'),
             ]
             )
+    ai_deck_wrapper2 = Node(
+            package='ai_deck_wrapper',
+            executable='ai_deck_wrapper',
+            namespace='cf15',
+            output='screen',
+            parameters=[{
+                'period': 0.1,
+                'ip':"192.168.1.115"
+            }],
+            remappings=[
+                ('/image_rect', '/cf15/image_rect'),
+                ('/camera_info', '/cf15/camera_info'),
+            ])
+    apriltag_node2 = Node(
+            package='apriltag_ros',
+            executable='apriltag_node',
+            namespace='cf15',
+            output='screen',
+            remappings=[
+                ('/image_rect', '/cf15/image_rect'),
+                ('/camera_info', '/cf15/camera_info'),
+                ('/tf','/cf15/tf'),
+                ('/detections','/cf15/detections'),
+            ]
+            )
 
     # Create the launch description and populate
     ld = LaunchDescription()
     ld.add_action(ai_deck_wrapper)
     ld.add_action(apriltag_node)
+    ld.add_action(ai_deck_wrapper2)
+    ld.add_action(apriltag_node2)
 
     return ld
