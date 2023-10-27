@@ -3,13 +3,14 @@ from rclpy.node import Node
 from tf2_msgs.msg import TFMessage
 from std_msgs.msg import String
 from .land import land_command
+import time
 
 class MissionPlanner(Node):
 
     def __init__(self):
         super().__init__('mission_planner')
         #maybe do a subscription creation loop for drone in drones[]
-        self.undetectedTags = {"tag36h11:52"}
+        self.undetectedTags = {"tag36h11:64"}
         self.subscription = self.create_subscription(
             TFMessage,
             'cf13/tf',
@@ -30,10 +31,13 @@ class MissionPlanner(Node):
             detectedTag = msg.transforms[0].child_frame_id
             self.get_logger().info('I saw: "%s"' % detectedTag)
             if detectedTag in self.undetectedTags:
-                self.get_logger().info('Is in undetected tags')
+                self.get_logger().info('"%s" is in undetected tags' & detectedTag)
+                time.sleep(1)
+                self.get_logger().info('LANDING')
                 land_command()
-                #self.undetectedTags.remove(detectedTag)
-                #land
+                
+                self.undetectedTags.remove(detectedTag)
+                
         return
 
 

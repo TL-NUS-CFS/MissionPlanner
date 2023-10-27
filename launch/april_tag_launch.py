@@ -37,11 +37,16 @@ def generate_launch_description():
                 ('/tf','/cf13/tf'),
                 ('/detections','/cf13/detections'),
             ]
+    mission_planner = Node(
+            package='mission_planner',
+            executable='mission_planner',
+            output='screen',
             )
 
     # Create the launch description and populate
     ld = LaunchDescription()
     ld.add_action(ai_deck_wrapper)
     ld.add_action(apriltag_node)
+    ld.add_action(mission_planner)
 
     return ld
