@@ -62,6 +62,10 @@ def generate_launch_description():
                 ('/tf','/cf15/tf'),
                 ('/detections','/cf15/detections'),
             ]
+    mission_planner = Node(
+            package='mission_planner',
+            executable='mission_planner',
+            output='screen',
             )
 
     # Create the launch description and populate

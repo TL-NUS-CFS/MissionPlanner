@@ -33,9 +33,9 @@ class MissionPlanner(Node):
             #run takeoff.py
         if msg.transforms:
             detectedTag = msg.transforms[0].child_frame_id
-            self.get_logger().info('I saw: "%s"' % detectedTag)
+            self.get_logger().info('CF13 saw: "%s"' % detectedTag)
             if detectedTag in self.undetectedTags:
-                self.get_logger().info('Is in undetected tags')
+                self.get_logger().info('"%s" is in undetected tags'% detectedTag)
                 self.undetectedTags.remove(detectedTag)
                 land_command(0x13)
                 #land
@@ -51,9 +51,9 @@ class MissionPlanner(Node):
             #run takeoff.py
         if msg.transforms:
             detectedTag = msg.transforms[0].child_frame_id
-            self.get_logger().info('I saw: "%s"' % detectedTag)
+            self.get_logger().info('CF15 saw: "%s"' % detectedTag)
             if detectedTag in self.undetectedTags:
-                self.get_logger().info('Is in undetected tags')
+                self.get_logger().info('"%s" is in undetected tags'% detectedTag)
                 self.undetectedTags.remove(detectedTag)
                 land_command(0x15)
                 #land
