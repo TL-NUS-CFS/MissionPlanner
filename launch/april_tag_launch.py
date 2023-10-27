@@ -21,6 +21,7 @@ def generate_launch_description():
             output='screen',
             parameters=[{
                 'period': 0.1,
+                'ip': "192.168.1.115"
             }],
             remappings=[
                 ('/image_rect', '/cf13/image_rect'),
@@ -37,6 +38,7 @@ def generate_launch_description():
                 ('/tf','/cf13/tf'),
                 ('/detections','/cf13/detections'),
             ]
+    )
     mission_planner = Node(
             package='mission_planner',
             executable='mission_planner',
