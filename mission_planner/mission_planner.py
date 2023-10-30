@@ -9,7 +9,9 @@ class MissionPlanner(Node):
     def __init__(self):
         super().__init__('mission_planner')
         #maybe do a subscription creation loop for drone in drones[]
-        self.undetectedTags = {"tag36h11:52"}
+        #self.declare_parameter("undetectedTags", ["tag36h11:52","tag36h11:203"]) 
+        #self.undetectedTags = set(self.get_parameter("undetectedTags"))
+        self.undetectedTags = {"tag36h11:52","tag36h11:203"}
         self.subscription = self.create_subscription(
             TFMessage,
             'cf13/tf',
@@ -21,6 +23,7 @@ class MissionPlanner(Node):
             self.listener_callback2,
             10)
         self.subscription  # prevent unused variable warning
+        self.subscription2  # prevent unused variable warning
 
     def listener_callback(self, msg):
         #self.get_logger().info('I heard: "something' )
@@ -32,6 +35,7 @@ class MissionPlanner(Node):
             #ignore
             #run takeoff.py
         if msg.transforms:
+            self.get_logger().info('CF13 saw')
             detectedTag = msg.transforms[0].child_frame_id
             self.get_logger().info('CF13 saw: "%s"' % detectedTag)
             if detectedTag in self.undetectedTags:
@@ -50,6 +54,7 @@ class MissionPlanner(Node):
             #ignore
             #run takeoff.py
         if msg.transforms:
+            self.get_logger().info('CF15 saw')
             detectedTag = msg.transforms[0].child_frame_id
             self.get_logger().info('CF15 saw: "%s"' % detectedTag)
             if detectedTag in self.undetectedTags:
@@ -71,11 +76,7 @@ def main(args=None):
 
     rclpy.spin(mission_planner)
 
-    # Destroy the node explicitly
-    # (optional - otherwise it will be done automatically
-    # when the garbage collector destroys the node object)
-    mission_planner.destroy_node()
-    rclpy.shutdown()
+
 
 
 if __name__ == '__main__':

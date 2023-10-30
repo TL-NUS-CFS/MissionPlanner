@@ -21,6 +21,7 @@ def generate_launch_description():
             output='screen',
             parameters=[{
                 'period': 0.1,
+                'ip': "192.168.1.113"
             }],
             remappings=[
                 ('/image_rect', '/cf13/image_rect'),
@@ -61,11 +62,14 @@ def generate_launch_description():
                 ('/camera_info', '/cf15/camera_info'),
                 ('/tf','/cf15/tf'),
                 ('/detections','/cf15/detections'),
-            ]
+            ])
     mission_planner = Node(
             package='mission_planner',
             executable='mission_planner',
             output='screen',
+            # parameters=[{
+            #     'undetectedTags': ["tag36h11:200"]
+            # }],
             )
 
     # Create the launch description and populate
@@ -74,5 +78,6 @@ def generate_launch_description():
     ld.add_action(apriltag_node)
     ld.add_action(ai_deck_wrapper2)
     ld.add_action(apriltag_node2)
+    ld.add_action(mission_planner)
 
     return ld
