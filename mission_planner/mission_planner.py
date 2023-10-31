@@ -11,7 +11,7 @@ class MissionPlanner(Node):
         #maybe do a subscription creation loop for drone in drones[]
         #self.declare_parameter("undetectedTags", ["tag36h11:52","tag36h11:203"]) 
         #self.undetectedTags = set(self.get_parameter("undetectedTags"))
-        self.undetectedTags = {"tag36h11:52","tag36h11:203"}
+        self.undetectedTags = {"tag36h11:205","tag36h11:200"}
         self.subscription = self.create_subscription(
             TFMessage,
             'cf13/tf',
@@ -35,7 +35,7 @@ class MissionPlanner(Node):
             #ignore
             #run takeoff.py
         if msg.transforms:
-            self.get_logger().info('CF13 saw')
+            #self.get_logger().info('CF13 saw')
             detectedTag = msg.transforms[0].child_frame_id
             self.get_logger().info('CF13 saw: "%s"' % detectedTag)
             if detectedTag in self.undetectedTags:
@@ -54,13 +54,13 @@ class MissionPlanner(Node):
             #ignore
             #run takeoff.py
         if msg.transforms:
-            self.get_logger().info('CF15 saw')
+            #self.get_logger().info('CF15 saw')
             detectedTag = msg.transforms[0].child_frame_id
             self.get_logger().info('CF15 saw: "%s"' % detectedTag)
             if detectedTag in self.undetectedTags:
                 self.get_logger().info('"%s" is in undetected tags'% detectedTag)
                 self.undetectedTags.remove(detectedTag)
-                land_command(0x15)
+                land_command(0x14)
                 #land
         return
 

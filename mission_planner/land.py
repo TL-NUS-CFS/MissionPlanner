@@ -7,13 +7,13 @@ def land_command(drone_address=0xff):
     cr.set_channel(120)
     cr.set_data_rate(cr.DR_2MPS)
 
-    for i in range(5):
+    for i in range(2):
 
         # Send multicast packet to P2P port 7
         cr.set_address((0xff,0xe7,0xe7,0xe7,0xe7)) # sets destination address for outgoing packets
         cr.set_ack_enable(False) # disable acknowledgement for outgoing packets
         cr.send_packet( (0xff, 0x80, 0x63, 0x00, drone_address) ) # sends packet to destination address via radio link 
-        print('send')
+        print('send land to ' + str(drone_address))
 
         time.sleep(0.01)
 

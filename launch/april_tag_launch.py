@@ -46,7 +46,8 @@ def generate_launch_description():
             output='screen',
             parameters=[{
                 'period': 0.1,
-                'ip':"192.168.1.115"
+                'ip':"192.168.1.114",
+                'name':"cf15"
             }],
             remappings=[
                 ('/image_rect', '/cf15/image_rect'),
