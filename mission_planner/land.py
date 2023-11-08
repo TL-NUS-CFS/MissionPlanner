@@ -13,10 +13,11 @@ def land_command(drone_address=0xff):
         cr.set_address((0xff,0xe7,0xe7,0xe7,0xe7)) # sets destination address for outgoing packets
         cr.set_ack_enable(False) # disable acknowledgement for outgoing packets
         cr.send_packet( (0xff, 0x80, 0x63, 0x00, drone_address) ) # sends packet to destination address via radio link 
-        print('send land to ' + str(drone_address))
+        #print('send land to ' + str(drone_address))
 
         time.sleep(0.01)
-
+    cr.close()
+    return 0
 if __name__ == '__main__':
     land_command()
 '''

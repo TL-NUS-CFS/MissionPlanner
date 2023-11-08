@@ -11,7 +11,7 @@ class MissionPlanner(Node):
         #maybe do a subscription creation loop for drone in drones[]
         #self.declare_parameter("undetectedTags", ["tag36h11:52","tag36h11:203"]) 
         #self.undetectedTags = set(self.get_parameter("undetectedTags"))
-        self.undetectedTags = {"tag36h11:205","tag36h11:200"}
+        self.undetectedTags = {"tag36h11:200","tag36h11:204"}
         self.subscription = self.create_subscription(
             TFMessage,
             'cf13/tf',
@@ -39,7 +39,8 @@ class MissionPlanner(Node):
             detectedTag = msg.transforms[0].child_frame_id
             self.get_logger().info('CF13 saw: "%s"' % detectedTag)
             if detectedTag in self.undetectedTags:
-                self.get_logger().info('"%s" is in undetected tags'% detectedTag)
+                self.get_logger().info('Target "%s" has been detected' % detectedTag)    
+                self.get_logger().info('Landing Crazyflie 13 on "%s"' % detectedTag)
                 self.undetectedTags.remove(detectedTag)
                 land_command(0x13)
                 #land
@@ -58,7 +59,8 @@ class MissionPlanner(Node):
             detectedTag = msg.transforms[0].child_frame_id
             self.get_logger().info('CF15 saw: "%s"' % detectedTag)
             if detectedTag in self.undetectedTags:
-                self.get_logger().info('"%s" is in undetected tags'% detectedTag)
+                self.get_logger().info('Target "%s" has been detected' % detectedTag)    
+                self.get_logger().info('Landing Crazyflie 15 on "%s"' % detectedTag)       
                 self.undetectedTags.remove(detectedTag)
                 land_command(0x14)
                 #land
