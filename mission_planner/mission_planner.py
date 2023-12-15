@@ -33,29 +33,33 @@ class MissionPlanner(Node):
 
         drones = ["cf13","cf14","cf15","cf16","cf17"]
         self.subscriptions = [] 
-        
-        # Create a dictionary of callback functions
-        callbacks = {}
+        self.callbacks = {}
+
+        # Create a dictionary of callback functions wrt drones
         for drone in drones:
             # Extract the number from the drone's name and use it to construct the function name
             callback_name = 'listener_callback' + drone[2:]
-            callbacks[drone] = getattr(self, callback_name)
+            self.callbacks[drone] = getattr(self, callback_name)
 
-            def listener_callback(self, msg):
-                if msg.transforms:
-                    detectedTag = msg.transforms[0].child_frame_id
-                    self.get_logger().info( f'{drone} saw: "%s"' % detectedTag)
-                    if detectedTag in self.undetectedTags:
-                        self.get_logger().info('Target "%s" has been detected' % detectedTag)    
-                        self.get_logger().info(f'Landing {drone} on "%s"' % detectedTag)
-                        self.undetectedTags.remove(detectedTag)
-                        land_command(int(drone[2:]))
-                        land_command(int(drone[2:], 16))
-                return
+            def create_callback(drone):
+                def listener_callback(self, msg):
+                    if msg.transforms:
+                        detectedTag = msg.transforms[0].child_frame_id
+                        self.get_logger().info( f'{drone} saw: "%s"' % detectedTag)
+                        if detectedTag in self.undetectedTags:
+                            self.get_logger().info('Target "%s" has been detected' % detectedTag)    
+                            self.get_logger().info(f'Landing {drone} on "%s"' % detectedTag)
+                            self.undetectedTags.remove(detectedTag)
+                            #land_command(int(drone[2:]))
+                            land_command(int(drone[2:], 16))
+                    return
+                return listener_callback
             
-            listener_callback.__name__ = callback_name
-            setattr(self, callback_name, listener_callback)
-
+            
+            current_callback = create_callback(drone)
+            current_callback.__name__ = callback_name   # give the callback function a specific name.
+            setattr(self, callback_name, current_callback)
+            self.callbacks[drone] = current_callback
 
 
         # Create a subscription for each drone
@@ -63,7 +67,7 @@ class MissionPlanner(Node):
             current_subscription = self.create_subscription(
                 TFMessage,
                 drone + '/tf',
-                callbacks[drone],
+                self.callbacks[drone],
                 10)
             self.subscriptions.append(current_subscription)
             current_subscription
