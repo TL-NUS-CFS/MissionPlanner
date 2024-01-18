@@ -24,7 +24,8 @@ def generate_launch_description():
                 output='screen',
                 parameters=[{
                     'period': 0.1,
-                    'ip': f'192.168.1.1{namespace[2:]}'
+                    'ip': f'192.168.1.1{namespace[2:]}',
+                    'name': f'{namespace}'
                 }],
                 remappings=[
                     ('/image_rect', f'/{namespace}/image_rect'),
