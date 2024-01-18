@@ -1,6 +1,6 @@
 '''
-"ros2 run ai_deck_wrapper ai_deck_wrapper --ros-args -p period:=0.1 -r image_rect:=/cf13/image_rect -r camera_info:=/cf13/camera_info "
-"ros2 run apriltag_ros apriltag_node --ros-args -r image_rect:=/cf13/image_rect -r tf:=/cf13/tf -r camera_info:=/cf13/camera_info -r detections:=/cf13/detections"
+"ros2 run ai_deck_wrapper ai_deck_wrapper --ros-args -p period:=0.1 -r image_rect:=/cf37/image_rect -r camera_info:=/cf37/camera_info "
+"ros2 run apriltag_ros apriltag_node --ros-args -r image_rect:=/cf37/image_rect -r tf:=/cf37/tf -r camera_info:=/cf37/camera_info -r detections:=/cf37/detections"
 "ros2 run mission_planner mission_planner"
 '''
 import os
@@ -19,26 +19,26 @@ def generate_launch_description():
     ai_deck_wrapper = Node(
             package='ai_deck_wrapper',
             executable='ai_deck_wrapper',
-            namespace='cf13',
+            namespace='cf37',
             output='screen',
             parameters=[{
                 'period': 0.1,
                 'ip': "192.168.1.137"
             }],
             remappings=[
-                ('/image_rect', '/cf13/image_rect'),
-                ('/camera_info', '/cf13/camera_info'),
+                ('/image_rect', '/cf37/image_rect'),
+                ('/camera_info', '/cf37/camera_info'),
             ])
     apriltag_node = Node(
             package='apriltag_ros',
             executable='apriltag_node',
-            namespace='cf13',
+            namespace='cf37',
             output='screen',
             remappings=[
-                ('/image_rect', '/cf13/image_rect'),
-                ('/camera_info', '/cf13/camera_info'),
-                ('/tf','/cf13/tf'),
-                ('/detections','/cf13/detections'),
+                ('/image_rect', '/cf37/image_rect'),
+                ('/camera_info', '/cf37/camera_info'),
+                ('/tf','/cf37/tf'),
+                ('/detections','/cf37/detections'),
             ]
             )
     
@@ -46,55 +46,55 @@ def generate_launch_description():
     ai_deck_wrapper2 = Node(
             package='ai_deck_wrapper',
             executable='ai_deck_wrapper',
-            namespace='cf14',
+            namespace='cf38',
             output='screen',
             parameters=[{
                 'period': 0.1,
                 'ip':"192.168.1.138",
-                'name':"cf14"
+                'name':"cf38"
             }],
             remappings=[
-                ('/image_rect', '/cf14/image_rect'),
-                ('/camera_info', '/cf14/camera_info'),
+                ('/image_rect', '/cf38/image_rect'),
+                ('/camera_info', '/cf38/camera_info'),
             ])
     apriltag_node2 = Node(
             package='apriltag_ros',
             executable='apriltag_node',
-            namespace='cf14',
+            namespace='cf38',
             output='screen',
             remappings=[
-                ('/image_rect', '/cf14/image_rect'),
-                ('/camera_info', '/cf14/camera_info'),
-                ('/tf','/cf14/tf'),
-                ('/detections','/cf14/detections'),
+                ('/image_rect', '/cf38/image_rect'),
+                ('/camera_info', '/cf38/camera_info'),
+                ('/tf','/cf38/tf'),
+                ('/detections','/cf38/detections'),
             ])
     
-    # # DRONE 3
-    # ai_deck_wrapper3 = Node(
-    #         package='ai_deck_wrapper',
-    #         executable='ai_deck_wrapper',
-    #         namespace='cf15',
-    #         output='screen',
-    #         parameters=[{
-    #             'period': 0.1,
-    #             'ip':"192.168.1.139",
-    #             'name':"cf15"
-    #         }],
-    #         remappings=[
-    #             ('/image_rect', '/cf15/image_rect'),
-    #             ('/camera_info', '/cf15/camera_info'),
-    #         ])
-    # apriltag_node3 = Node(
-    #         package='apriltag_ros',
-    #         executable='apriltag_node',
-    #         namespace='cf15',
-    #         output='screen',
-    #         remappings=[
-    #             ('/image_rect', '/cf15/image_rect'),
-    #             ('/camera_info', '/cf15/camera_info'),
-    #             ('/tf','/cf15/tf'),
-    #             ('/detections','/cf15/detections'),
-    #         ])
+    # DRONE 3
+    ai_deck_wrapper3 = Node(
+            package='ai_deck_wrapper',
+            executable='ai_deck_wrapper',
+            namespace='cf39',
+            output='screen',
+            parameters=[{
+                'period': 0.1,
+                'ip':"192.168.1.139",
+                'name':"cf39"
+            }],
+            remappings=[
+                ('/image_rect', '/cf39/image_rect'),
+                ('/camera_info', '/cf39/camera_info'),
+            ])
+    apriltag_node3 = Node(
+            package='apriltag_ros',
+            executable='apriltag_node',
+            namespace='cf39',
+            output='screen',
+            remappings=[
+                ('/image_rect', '/cf39/image_rect'),
+                ('/camera_info', '/cf39/camera_info'),
+                ('/tf','/cf39/tf'),
+                ('/detections','/cf39/detections'),
+            ])
     
     # # DRONE 4
     # ai_deck_wrapper4 = Node(
@@ -168,8 +168,8 @@ def generate_launch_description():
     ld.add_action(apriltag_node)
     ld.add_action(ai_deck_wrapper2)
     ld.add_action(apriltag_node2)
-    # ld.add_action(ai_deck_wrapper3)
-    # ld.add_action(apriltag_node3)
+    ld.add_action(ai_deck_wrapper3)
+    ld.add_action(apriltag_node3)
     # ld.add_action(ai_deck_wrapper4)
     # ld.add_action(apriltag_node4)
     # ld.add_action(ai_deck_wrapper5)
