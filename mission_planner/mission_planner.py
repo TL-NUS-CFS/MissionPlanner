@@ -8,24 +8,26 @@ class MissionPlanner(Node):
 
 
     def create_callback(self, drone,drones):
+        channel = 80
         def listener_callback(msg):
-            if drones[drone] == False:
-                return
             if msg.transforms:
                 detectedTag = msg.transforms[0].child_frame_id
                 self.get_logger().info( f'{drone} saw: "%s"' % detectedTag)
+                if drones[drone] == False:
+                    self.get_logger().info( f'IGNORING {drone}')
+                    return
                 if detectedTag in self.undetectedTags: # Single rescue
                     self.get_logger().info('Target "%s" has been detected' % detectedTag)    
                     self.get_logger().info(f'Landing {drone} on "%s"' % detectedTag)
                     self.undetectedTags.remove(detectedTag)
                     drones[drone] = False
-                    land_command(int(drone[2:], 16))
+                    land_command(int(drone[2:], 16),channel)
                 elif detectedTag in self.doublerescue and self.doublerescue[detectedTag]>0: #double rescue
                     self.doublerescue[detectedTag] -= 1
                     self.get_logger().info('Target "%s" has been detected' % detectedTag)    
                     self.get_logger().info(f'Landing {drone} on "%s"' % detectedTag)
                     drones[drone] = False
-                    land_command(int(drone[2:], 16))
+                    land_command(int(drone[2:], 16),channel)
             return
         return listener_callback
     
@@ -33,9 +35,11 @@ class MissionPlanner(Node):
     def __init__(self):
         
         super().__init__('mission_planner')
-        self.undetectedTags = {"tag36h11:200","tag36h11:204"}
+        #self.declare_parameter("undetectedTags", {"tag36h11:200","tag36h11:204"}) 
+        self.undetectedTags = {"tag36h11:200","tag36h11:204","tag36h11:205"}
         self.doublerescue = {"tag36h11:206":2}
-        drones = {"cf01":True,"cf02":True,"cf03":True, "cf04":True,"cf05":True}
+        
+        drones = {"cf04":True,"cf03":True,"cf05":True}
         self.callbacks = {}
    
             

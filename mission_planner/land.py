@@ -1,10 +1,10 @@
 from cflib.drivers.crazyradio import Crazyradio
 import time
 
-def land_command(drone_address=0xff):   
+def land_command(drone_address=0xff,channel):   
     cr = Crazyradio(devid=0) #devid = radio dongle id (0 being the first dongle)
 
-    cr.set_channel(120)
+    cr.set_channel(channel)
     cr.set_data_rate(cr.DR_2MPS)
 
     for i in range(2):
