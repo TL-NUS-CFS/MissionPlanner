@@ -58,6 +58,7 @@ def generate_launch_description():
 
     # Create the launch description and populate
     ld = LaunchDescription()
+
     for i in nodes:
         ld.add_action(i)
     ld.add_action(mission_planner)

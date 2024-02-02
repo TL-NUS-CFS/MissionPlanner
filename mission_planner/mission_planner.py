@@ -3,6 +3,7 @@ from rclpy.node import Node
 from tf2_msgs.msg import TFMessage
 from std_msgs.msg import String
 from .land import land_command
+import time
 
 class MissionPlanner(Node):
 
@@ -35,6 +36,7 @@ class MissionPlanner(Node):
     def __init__(self):
         
         super().__init__('mission_planner')
+
         #self.declare_parameter("undetectedTags", {"tag36h11:200","tag36h11:204"}) 
         self.undetectedTags = {"tag36h11:200","tag36h11:204","tag36h11:205"}
         self.doublerescue = {"tag36h11:206":2}
@@ -47,7 +49,6 @@ class MissionPlanner(Node):
         for drone in drones:
             # Extract the number from the drone's name and use it to construct the function name
             callback_name = 'listener_callback' + drone[2:]
-
             current_callback = self.create_callback(drone,drones)
             current_callback.__name__ = callback_name   # give the callback function a specific name.
             setattr(self, callback_name, current_callback)
