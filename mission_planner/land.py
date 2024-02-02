@@ -21,7 +21,7 @@ def land_command(drone_address=0xff,channel=80):
     return 0
 if __name__ == '__main__':
     if len(sys.argv)>1:
-        land_command(channel = int(sys.argv[1]),drone_address = int(sys.argv[2],16))
+        land_command(channel = int(sys.argv[1]),drone_address = int(hex(int(sys.argv[2])),16))
     else:
         land_command()
 '''
