@@ -6,9 +6,7 @@ cr = Crazyradio(devid=0)
 cr.set_channel(120)
 cr.set_data_rate(cr.DR_2MPS)
 
-for i in range(5):
-
-
+for i in range(3):
     # Send multicast packet to P2P port 7
     cr.set_address((0xff,0xe7,0xe7,0xe7,0xe7))
     cr.set_ack_enable(False)
