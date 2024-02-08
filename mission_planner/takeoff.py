@@ -1,6 +1,7 @@
 from cflib.drivers.crazyradio import Crazyradio
-import time
+import time; import threading
 import sys
+from land_all import land_all_command
 
 def takeoff(channel):
     cr = Crazyradio(devid=0)
@@ -15,6 +16,12 @@ def takeoff(channel):
         print('send')
 
         time.sleep(0.01)
-
+    cr.close()
 if __name__ == '__main__':
-    takeoff(channel=int(sys.argv[1]))
+    if len(sys.argv) > 1:
+        for i in range(1, len(sys.argv)):
+            takeoff(channel = int(sys.argv[i]))
+
+    timer_thread = threading.Timer(2, land_all_command) 
+    timer_thread.start()       
+    #takeoff(channel=int(sys.argv[1]))

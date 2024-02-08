@@ -22,13 +22,13 @@ class MissionPlanner(Node):
                     self.get_logger().info(f'Landing {drone} on "%s"' % detectedTag)
                     self.undetectedTags.remove(detectedTag)
                     drones[drone] = False
-                    land_command(int(drone[2:], 16),channel)
+                    land_command(channel, int(drone[2:], 16))
                 elif detectedTag in self.doublerescue and self.doublerescue[detectedTag]>0: #double rescue
                     self.doublerescue[detectedTag] -= 1
                     self.get_logger().info('Target "%s" has been detected' % detectedTag)    
                     self.get_logger().info(f'Landing {drone} on "%s"' % detectedTag)
                     drones[drone] = False
-                    land_command(int(drone[2:], 16),channel)
+                    land_command(channel,int(drone[2:], 16))
             return
         return listener_callback
     
@@ -41,7 +41,10 @@ class MissionPlanner(Node):
         self.undetectedTags = {"tag36h11:200","tag36h11:204","tag36h11:205"}
         self.doublerescue = {"tag36h11:206":2}
         
-        drones = {"cf04":True,"cf03":True,"cf05":True}
+
+        drone_ids = ["cf01","cf02","cf03","cf04","cf05","cf06","cf07","cf11","cf13","cf12"]
+        drones = {drone_id: True for drone_id in drone_ids}
+        
         self.callbacks = {}
    
             
