@@ -21,8 +21,11 @@ def land_command(channel,drone_address=0xff):
     return 0
 
 if __name__ == '__main__':
-    if len(sys.argv)>1:
-        land_command(channel = int(sys.argv[1]),drone_address = int(sys.argv[2],16))
+    try:
+            land_command(channel=int(sys.argv[1]), drone_address=int(sys.argv[2], 16))
+    except IndexError:
+        print("Please specify channel and drone ID")
+        
         
         
 '''
