@@ -4,33 +4,32 @@ import sys
 from land_all import land_all_command
 
 def takeoff(channel):
-    cr = Crazyradio(devid=0)
-    print(channel)
-    cr.set_channel(int(channel[1]))
-    cr.set_data_rate(cr.DR_2MPS)
 
-    cr2 = Crazyradio(devid=1)
-    cr2.set_channel(int(channel[2]))
-    cr2.set_data_rate(cr.DR_2MPS)
+    all_cr = dict()
+    for i in range(0, len(channel)-1):
+        variable = 'cr_' + str(i)
+        all_cr[variable] = Crazyradio(devid=i)
+        all_cr[variable].set_channel(int(channel[i+1]))
+        all_cr[variable].set_data_rate(all_cr[variable].DR_2MPS)
 
+
+    # Takeoff for multiple channels 
     for i in range(3):
-        # Takeoff for 1st channel 
-        cr.set_address((0xff,0xe7,0xe7,0xe7,0xe7))
-        cr.set_ack_enable(False)
-        cr.send_packet( (0xff, 0x80, 0x63, 0x01, 0xff) )
-        print('CR1: send')
-
-        # Takeoff for 2nd channel 
-        cr2.set_address((0xff,0xe7,0xe7,0xe7,0xe7))
-        cr2.set_ack_enable(False)
-        cr2.send_packet( (0xff, 0x80, 0x63, 0x01, 0xff) )
-        print('CR2: send')
-
+        for i, (variable, cr) in enumerate(all_cr.items()):
+          
+            cr.set_address((0xff,0xe7,0xe7,0xe7,0xe7))
+            cr.set_ack_enable(False)
+            cr.send_packet( (0xff, 0x80, 0x63, 0x01, 0xff) )
+            print(str(variable), 'send')
         time.sleep(0.01)
-    cr.close()
-    cr2.close()
-if __name__ == '__main__':
-    takeoff(channel=(sys.argv[1]))
 
-    timer_thread = threading.Timer(2, land_all_command) 
+    for i, (variable, cr) in enumerate(all_cr.items()):
+        cr.close()
+
+
+if __name__ == '__main__':
+    print('here',sys.argv)
+    takeoff(channel=(sys.argv))
+
+    timer_thread = threading.Timer(1, land_all_command, args=(sys.argv,))
     timer_thread.start()       
