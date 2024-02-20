@@ -9,7 +9,7 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch_ros.actions import Node
 
-drones = ["cf01","cf02","cf03","cf04","cf05"]
+drones = ["cf01","cf02","cf03","cf04","cf05","cf06","cf07","cf11","cf13","cf12"]
 
 
 
