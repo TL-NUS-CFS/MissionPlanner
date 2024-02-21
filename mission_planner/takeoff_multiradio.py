@@ -20,7 +20,7 @@ def takeoff(channel):
             cr.set_address((0xff,0xe7,0xe7,0xe7,0xe7))
             cr.set_ack_enable(False)
             cr.send_packet( (0xff, 0x80, 0x63, 0x01, 0xff) )
-            print(str(variable), 'send')
+            print(str(variable), 'send takeoff for channel', int(channel[i+1]))
         time.sleep(0.01)
 
     for i, (variable, cr) in enumerate(all_cr.items()):
@@ -31,5 +31,6 @@ if __name__ == '__main__':
     print('here',sys.argv)
     takeoff(channel=(sys.argv))
 
-    timer_thread = threading.Timer(1, land_all_command, args=(sys.argv,))
+    time_value= 300 # vary the time value to change the time delay before landing
+    timer_thread = threading.Timer(time_value, land_all_command, args=(sys.argv,)) 
     timer_thread.start()       
