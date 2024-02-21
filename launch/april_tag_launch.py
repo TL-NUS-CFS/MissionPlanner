@@ -9,8 +9,9 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch_ros.actions import Node
 
-drones = ["cf01","cf02","cf03","cf04","cf05","cf06","cf07","cf11","cf13","cf12"]
-
+drones = ["cf01","cf02","cf03","cf04","cf05","cf06","cf07","cf09","cf11","cf13","cf12"]
+#drones = ["cf02","cf05"]
+#drones = ["cf01"]
 
 
 def generate_launch_description():

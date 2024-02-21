@@ -22,8 +22,9 @@ def land_all_command(channel):
 
             cr.set_address((0xff,0xe7,0xe7,0xe7,0xe7)) # sets destination address for outgoing packets
             cr.set_ack_enable(False) # disable acknowledgement for outgoing packets
-            cr.send_packet((0xff, 0x80, 0x63, 0x00, 0xff )) # sends packet to destination address via radio link 
-            print(str(variable),'send land to all')
+            cr.send_packet((0xff, 0x80, 0x63, 0x02, 0xff )) # sends packet to destination address via radio link 
+            #cr.send_packet( (0xff, 0x80, 0x63, 0x00, 0xff))
+            print(str(variable), 'Move away from walls ', int(channel[i+1]))
 
         time.sleep(0.01)
 
@@ -32,4 +33,3 @@ def land_all_command(channel):
 if __name__ == '__main__':
     print('here',sys.argv)
     land_all_command(channel=(sys.argv))
-    #land_all_command(channel=int(sys.argv[1]), drone_address=int(sys.argv[2], 16))
