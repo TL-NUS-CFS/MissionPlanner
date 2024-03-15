@@ -3,6 +3,7 @@ from cflib.drivers.crazyradio import Crazyradio
 import time
 import sys
 
+
 def land_command(channel,drone_address=0xff):   
     cr = Crazyradio(devid=0) #devid = radio dongle id (0 being the first dongle)
 
@@ -15,6 +16,7 @@ def land_command(channel,drone_address=0xff):
         cr.set_ack_enable(False) # disable acknowledgement for outgoing packets
         cr.send_packet( (0xff, 0x80, 0x63, 0x00, drone_address) ) # sends packet to destination address via radio link 
         print('send land to ' + str(drone_address))
+       
 
         time.sleep(0.01)
     cr.close()

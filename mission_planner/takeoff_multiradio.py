@@ -7,8 +7,8 @@ def takeoff(channel):
 
     all_cr = dict()
     for i in range(len(channel)):
-        variable = 'cr_' + str(i)
-        all_cr[variable] = Crazyradio(devid=i)
+        variable = 'cr_' + str(i+1)
+        all_cr[variable] = Crazyradio(devid=i+1)
         all_cr[variable].set_channel(int(channel[i]))
         all_cr[variable].set_data_rate(all_cr[variable].DR_2MPS)
 
@@ -38,10 +38,12 @@ if __name__ == '__main__':
 
     print('takeoff for first wave')
     takeoff(channel=channel_list)
-    time.sleep(2)
+    time.sleep(20)
     print('takeoff for second wave')
     takeoff(channel=channel_list_2)
-    time.sleep(2)
+    time.sleep(90)
+    print('MISSION TIME 50%')
+    time.sleep(90)
     print('land for first wave')
     land_all_command(channel=channel_list)
     time.sleep(2)

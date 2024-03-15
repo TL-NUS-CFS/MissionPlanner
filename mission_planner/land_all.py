@@ -10,8 +10,8 @@ def land_all_command(channel):
     # Define crazyradios
     all_cr = dict()
     for i in range(len(channel)):
-        variable = 'cr_' + str(i)
-        all_cr[variable] = Crazyradio(devid=i)
+        variable = 'cr_' + str(i+1)
+        all_cr[variable] = Crazyradio(devid=i+1)
         all_cr[variable].set_channel(int(channel[i]))
         all_cr[variable].set_data_rate(all_cr[variable].DR_2MPS)
 
