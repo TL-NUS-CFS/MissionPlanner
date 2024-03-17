@@ -50,7 +50,9 @@ class MissionPlanner(Node):
         #drone_ids = ["cf06","cf07","cf08","cf09","cf10","cf11"]
         #drone_ids = ["cf01","cf02","cf03","cf04","cf05","cf09"]
         drones = {drone_id: True for drone_id in drone_ids}
-        drone_channel = {"cf01":80,"cf02":80,"cf03":80,"cf04":80,"cf05":80,"cf06":120,"cf07":120,"cf08":120,"cf09":100,"cf10":100,"cf11":120,"cf12":120,"cf13":120,"cf14":120,"cf15":120}
+        drone_channel = {"cf01":80,"cf02":80,"cf03":80,"cf04":80,"cf05":80,
+        "cf06":120,"cf07":120,"cf08":120,"cf09":100,"cf10":100,
+        "cf11":120,"cf12":120,"cf13":120,"cf14":120,"cf15":120}
         self.callbacks = {}
    
             
