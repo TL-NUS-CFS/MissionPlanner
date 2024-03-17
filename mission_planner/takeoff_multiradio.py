@@ -3,7 +3,10 @@ import time; import threading
 import sys
 from land_all import land_all_command
 
-def takeoff(channel):
+def takeoff_multiradio(channel):
+    #uses radios 1,2,etc for however many different channels specified
+    #radio 0 reserved for land.py
+    #always plug in one more radio than number of channels used
 
     all_cr = dict()
     for i in range(len(channel)):
@@ -29,27 +32,8 @@ def takeoff(channel):
 
 if __name__ == '__main__':
     #print('input',sys.argv)
-    half = len(sys.argv[1:])//2
-    all_channels = sys.argv[1:]
-    channel_list = all_channels[:half]
-    print('first wave',channel_list)
-    channel_list_2 = all_channels[half:]
-    print('second wave',channel_list_2)
-
-    print('takeoff for first wave')
-    takeoff(channel=channel_list)
-    time.sleep(20)
-    print('takeoff for second wave')
-    takeoff(channel=channel_list_2)
-    time.sleep(90)
-    print('MISSION TIME 50%')
-    time.sleep(90)
-    print('land for first wave')
-    land_all_command(channel=channel_list)
-    time.sleep(2)
-    print('land for second wave')
-    land_all_command(channel=channel_list_2)
-
-    # time_value= 60 # vary the time value to change the time delay before landing
-    # timer_thread = threading.Timer(time_value, land_all_command, args=(sys.argv,)) 
-    # timer_thread.start()       
+    channel_list = sys.argv[1:]
+    try:
+            takeoff_multiradio(channel=channel_list)
+    except IndexError:
+        print("Please specify channels")
