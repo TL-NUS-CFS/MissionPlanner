@@ -1,7 +1,7 @@
 import time; import threading
 import sys
 from land_all import land_all_command
-from takeoff_multiradio import takeoff
+from takeoff_multiradio import takeoff_multiradio
 
 
 MISSION_TIME = 180
@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
     print('takeoff for first wave')
     takeoff_multiradio(channel=channel_list)
-    time.sleep(WAVE_INTERVAL)
+    time.sleep(WAVE_LAND_INTERVAL)
     print('takeoff for second wave')
     takeoff_multiradio(channel=channel_list_2)
 
