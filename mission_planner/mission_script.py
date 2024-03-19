@@ -5,7 +5,7 @@ from takeoff_multiradio import takeoff_multiradio
 
 
 MISSION_TIME = 180
-WAVE_TAKEOFF_INTERVAL = 20
+WAVE_TAKEOFF_INTERVAL = 45
 WAVE_LAND_INTERVAL = 2
 
 if __name__ == '__main__':
@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
     print('takeoff for first wave')
     takeoff_multiradio(channel=channel_list)
-    time.sleep(WAVE_LAND_INTERVAL)
+    time.sleep(WAVE_TAKEOFF_INTERVAL)
     print('takeoff for second wave')
     takeoff_multiradio(channel=channel_list_2)
 
