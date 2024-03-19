@@ -29,7 +29,7 @@ class MissionPlanner(Node):
                     self.get_logger().info(f'Landing {drone} on "%s"' % detectedTag)
                     drones[drone] = False
                     if self.doublerescue[detectedTag] == 0:
-                        self.doublerescue.remove(detectedTag)
+                        self.doublerescue.pop(detectedTag)
                     land_command(channel,int(drone[2:], 16))
                 self.get_logger().info(f'TARGETS REMAINING {len(self.undetectedTags) + len(self.doublerescue)}')
             return
