@@ -46,13 +46,19 @@ class MissionPlanner(Node):
         self.doublerescue = {"tag36h11:6":2,"tag36h11:7":2,"tag36h11:8":2,"tag36h11:9":2,"tag36h11:10":2}
         
         #drone_ids = ["cf01","cf02","cf03","cf04","cf05","cf06","cf12","cf13"]
-        drone_ids = ["cf01","cf02","cf03","cf04","cf05","cf06","cf07","cf08","cf09","cf10","cf11","cf12","cf13","cf14","cf15"]
+        drone_ids = ["cf01","cf02","cf03","cf04","cf05",
+        "cf06","cf07","cf08","cf09","cf10",
+        "cf11","cf12","cf13","cf14","cf15",
+        "cf16","cf17","cf18","cf19","cf20",
+        "cf21","cf22","cf23","cf24","cf25",]
         #drone_ids = ["cf06","cf07","cf08","cf09","cf10","cf11"]
         #drone_ids = ["cf01","cf02","cf03","cf04","cf05","cf09"]
         drones = {drone_id: True for drone_id in drone_ids}
         drone_channel = {"cf01":80,"cf02":80,"cf03":80,"cf04":80,"cf05":80,
-        "cf06":120,"cf07":120,"cf08":120,"cf09":100,"cf10":100,
-        "cf11":120,"cf12":120,"cf13":120,"cf14":120,"cf15":120}
+        "cf06":120,"cf07":120,"cf08":120,"cf09":120,"cf10":120,
+        "cf11":120,"cf12":120,"cf13":120,
+        "cf14":60,"cf15":60,"cf16":60,"cf17":60,"cf18":60,"cf19":60,"cf20":60,
+        "cf21":60,"cf22":60,"cf23":60,"cf24":60,"cf25":60}
         self.callbacks = {}
    
             
