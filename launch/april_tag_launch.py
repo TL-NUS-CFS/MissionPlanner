@@ -15,7 +15,8 @@ drone_ids = ["cf01","cf02","cf03","cf04","cf05",
         "cf06","cf07","cf08","cf09","cf10",
         "cf11","cf12","cf13","cf14","cf15",
         "cf16","cf17","cf18","cf19","cf20",
-        "cf21","cf22","cf23","cf24","cf25",]
+        "cf21","cf22","cf23","cf24","cf25",
+        "cf26","cf27","cf28","cf29"]
 #drone_ids = ["cf04"]
 #drone_ids = ["cf01"]
 

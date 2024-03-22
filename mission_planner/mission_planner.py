@@ -28,9 +28,9 @@ class MissionPlanner(Node):
                     self.get_logger().info('Target "%s" has been detected' % detectedTag)    
                     self.get_logger().info(f'Landing {drone} on "%s"' % detectedTag)
                     drones[drone] = False
+                    land_command(channel,int(drone[2:], 16))                    
                     if self.doublerescue[detectedTag] == 0:
                         self.doublerescue.pop(detectedTag)
-                    land_command(channel,int(drone[2:], 16))
                 self.get_logger().info(f'TARGETS REMAINING {len(self.undetectedTags) + len(self.doublerescue)}')
             return
         return listener_callback
@@ -50,7 +50,8 @@ class MissionPlanner(Node):
         "cf06","cf07","cf08","cf09","cf10",
         "cf11","cf12","cf13","cf14","cf15",
         "cf16","cf17","cf18","cf19","cf20",
-        "cf21","cf22","cf23","cf24","cf25",]
+        "cf21","cf22","cf23","cf24","cf25",
+        "cf26","cf27","cf28","cf29"]
         #drone_ids = ["cf06","cf07","cf08","cf09","cf10","cf11"]
         #drone_ids = ["cf01","cf02","cf03","cf04","cf05","cf09"]
         drones = {drone_id: True for drone_id in drone_ids}
@@ -58,7 +59,8 @@ class MissionPlanner(Node):
         "cf06":120,"cf07":120,"cf08":120,"cf09":120,"cf10":120,
         "cf11":120,"cf12":120,"cf13":120,
         "cf14":60,"cf15":60,"cf16":60,"cf17":60,"cf18":60,"cf19":60,"cf20":60,
-        "cf21":60,"cf22":60,"cf23":60,"cf24":60,"cf25":60}
+        "cf21":60,"cf22":60,"cf23":60,"cf24":60,"cf25":60,
+        "cf26":120,"cf27":80,"cf28":60,"cf29":60}
         self.callbacks = {}
    
             
